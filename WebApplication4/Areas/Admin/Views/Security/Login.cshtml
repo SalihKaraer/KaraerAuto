@@ -1,0 +1,47 @@
+﻿@model WebApplication4.Models.Kullanici
+<h1 style="color:wheat"> Giriş Yap</h1>
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Areas/Admin/Views/Shared/_LoginAdmin.cshtml";
+}
+
+
+@using (Html.BeginForm("Login", "Security", FormMethod.Post))
+{
+
+<div class="form-group">
+    @*@Html.LabelFor(a => a.KullaniciAd)*@
+    <label style="color:wheat" >Kullanıcı Adı</label>
+    @Html.TextBoxFor(a => a.KullaniciAd, new { @class = "form-control" })
+    @Html.ValidationMessageFor(a => a.KullaniciAd)
+    <label id="lblAdHata" style="display:none;color:red"> Kullanıcı Adı Boş Bırakılamaz</label>
+</div>
+<div class="form-group">
+    @*@Html.LabelFor(a => a.Sifre)*@
+    <label style="color:wheat">Şifre</label>
+    @Html.TextBoxFor(a => a.Sifre, new { @class = "form-control" })
+    @Html.ValidationMessageFor(a => a.Sifre)
+    <label id="lblSifreHata" style="display:none;color:red">Sifre Boş Bırakılamaz</label>
+</div>
+    <input type="submit" name="btnKaydet" value="Giris" class="btn btn-success" onclick="return BoslukKontrol()" />
+}
+
+@section scripts{
+    <script>
+        function BoslukKontrol() {
+            var hatayok = true;
+            if ($("#KullaniciAd").val() == "" || $("#Sifre").val() == "") {
+                $("#lblAdHata").show();
+                $("#lblSifreHata").show();
+                hatayok = false;
+            }
+            return hatayok;
+
+        }
+    </script>
+}
+
+
+
+
